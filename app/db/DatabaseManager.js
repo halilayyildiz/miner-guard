@@ -61,19 +61,25 @@ function getUserWallets(userId) {
     })
 }
 
-
-
 function getUserHourlyEarnings(userId) {
     return new Promise((resolve, reject) => {
-        db.get('SELECT substr(DATETIME, 1, 13) AS DATE_HOUR, MAX(TOTAL_EARNING) AS EARNED FROM USER_EARNING WHERE USER_ID = ? GROUP BY DATE_HOUR ORDER BY DATE_HOUR desc', [userId], (err, rows) => {
+        db.all('SELECT substr(DATETIME, 1, 13) AS DATE_HOUR, MAX(TOTAL_EARNING) AS EARNED FROM USER_EARNING WHERE USER_ID = ? GROUP BY DATE_HOUR ORDER BY DATE_HOUR desc', [userId], (err, rows) => {
             if (err) {
                 return reject(err)
             }
 
-            let result = [];
+            var result = [];
+
+            console.log(rows);
+
             for (let i = 0; i < rows.length; i++) {
-                result[i].hour = rows.DATE_HOUR;
-                result[i].earned = rows.EARNED;
+                var test = {
+                    "hour": rows[i].DATE_HOUR,
+                    "earned": rows[i].EARNED
+                };
+                console.log(test);
+                result[i] = test;
+
             }
 
             return resolve(result);

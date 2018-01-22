@@ -6,8 +6,6 @@ module.exports = {
     startup: startup
 }
 
-startup();
-
 async function startup() {
     // connect to sqlite3 database
     await dbManager.connectDatabase();
