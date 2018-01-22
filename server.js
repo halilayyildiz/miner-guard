@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 // register routes
 app.use('/api/earning', earningRoutes);
 
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 80;
 app.listen(port);
 
 console.log('Miner Guard App Started ' + port);
