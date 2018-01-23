@@ -70,16 +70,12 @@ function getUserHourlyEarnings(userId) {
 
             var result = [];
 
-            console.log(rows);
-
             for (let i = 0; i < rows.length; i++) {
                 var test = {
                     "hour": rows[i].DATE_HOUR,
                     "earned": rows[i].EARNED
                 };
-                console.log(test);
                 result[i] = test;
-
             }
 
             return resolve(result);

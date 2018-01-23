@@ -37,7 +37,6 @@ async function checkStatus() {
 async function getUserWithWallets() {
 
     let userList = await dbManager.getAllUsers();
-    // console.log(userList);
 
     let wallets = [];
     for (var i = 0; i < userList.length; i++) {
@@ -45,7 +44,6 @@ async function getUserWithWallets() {
         wallets[i] = await dbManager.getUserWallets(userList[i].id);
         userList[i].wallet = wallets[i];
     }
-    // console.log(wallets);
 
     return userList;
 }
