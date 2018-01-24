@@ -9,6 +9,7 @@ module.exports = {
     getAllUsers: getAllUsers,
     getUserWallets: getUserWallets,
     getUserHourlyEarnings: getUserHourlyEarnings,
+    getUserDailyEarnings: getUserDailyEarnings,
     updateWalletTotalEarning: updateWalletTotalEarning,
     updateUserTotalEarning: updateUserTotalEarning
 }
@@ -74,6 +75,28 @@ function getUserHourlyEarnings(userId) {
             for (let i = 0; i < rows.length; i++) {
                 var test = {
                     "hour": rows[i].DATE_HOUR,
+                    "earned": rows[i].EARNED
+                };
+                result[i] = test;
+            }
+
+            return resolve(result);
+        })
+    })
+}
+
+function getUserDailyEarnings(userId) {
+    return new Promise((resolve, reject) => {
+        db.all('SELECT substr(DATETIME, 1, 10) AS DATE_DAY, MAX(TOTAL_EARNING) AS EARNED FROM USER_EARNING WHERE USER_ID = ? GROUP BY DATE_DAY ORDER BY DATE_DAY desc', [userId], (err, rows) => {
+            if (err) {
+                return reject(err)
+            }
+
+            var result = [];
+
+            for (let i = 0; i < rows.length; i++) {
+                var test = {
+                    "day": rows[i].DATE_DAY,
                     "earned": rows[i].EARNED
                 };
                 result[i] = test;

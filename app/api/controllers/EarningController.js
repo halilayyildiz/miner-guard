@@ -6,10 +6,27 @@ exports.listHourlyEarning = async function(req, res) {
 
     let result = [];
     for (var i = 0; i < earningList.length - 1; i++) {
-        result[i] = {};
-        result[i].hour = earningList[i].hour;
-        result[i].totalEarned = earningList[i].earned;
-        result[i].diff = (earningList[i].earned - earningList[i + 1].earned);
+        result[i] = {
+            "hour": earningList[i].hour,
+            "earned": (earningList[i].earned - earningList[i + 1].earned),
+            "total": earningList[i].earned,
+        };
+    }
+
+    res.json(result);
+};
+
+exports.listDailyEarning = async function(req, res) {
+
+    let earningList = await dbManager.getUserDailyEarnings(req.params.userId);
+
+    let result = [];
+    for (var i = 0; i < earningList.length - 1; i++) {
+        result[i] = {
+            "day": earningList[i].day,
+            "earned": (earningList[i].earned - earningList[i + 1].earned),
+            "total": earningList[i].earned,
+        };
     }
 
     res.json(result);
