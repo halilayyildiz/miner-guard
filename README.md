@@ -9,3 +9,7 @@ This applcation simply checks earnings of the miners on ahashpool. Supports mult
 Get hourly earnings of user with id = 1 
 
 `http://localhost:8080/api/earning/1/hourly`
+
+Get daily earnings of user with id = 1 
+
+`http://localhost:8080/api/earning/1/daily`
