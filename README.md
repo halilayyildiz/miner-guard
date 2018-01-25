@@ -18,4 +18,4 @@ Get daily earnings of user with id = 1
 
 `https://miner-pool-guard.herokuapp.com/api/earning/1/hourly`
 
-All work and no playt makes Erk a dull boy
+All work and no playt makes Erk a dull bot
