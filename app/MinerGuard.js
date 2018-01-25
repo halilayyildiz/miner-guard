@@ -1,5 +1,6 @@
 var dbManager = require('./db/DatabaseManager.js');
 var poolService = require('./service/PoolService.js');
+var currencyService = require('./service/CurrencyService.js');
 var User = require('./model/user.js');
 var Wallet = require('./model/wallet.js');
 
@@ -8,8 +9,14 @@ module.exports = {
 }
 
 async function checkStatus() {
+
+    // update bitcoin price
+    await currencyService.refreshBitcoinPrice();
+    
+    // get users
     let users = await getUserWithWallets();
 
+    // for each user
     for (var i = 0; i < users.length; i++) {
         users[i].totalEarning = 0;
         users[i].activeMinerCount = 0;
@@ -22,6 +29,7 @@ async function checkStatus() {
             users[i].totalEarning += walletData.total_earned;
             users[i].activeMinerCount += walletData.miners.length;
         }
+        
         // update user total earning
         dbManager.updateUserTotalEarning(users[i], users[i].totalEarning);
         
