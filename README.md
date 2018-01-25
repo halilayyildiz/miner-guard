@@ -17,5 +17,3 @@ Get daily earnings of user with id = 1
 ## Test Link
 
 `https://miner-pool-guard.herokuapp.com/api/earning/1/hourly`
-
-All work and no playt makes Erk a dull bot
