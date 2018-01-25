@@ -13,3 +13,5 @@ Get hourly earnings of user with id = 1
 Get daily earnings of user with id = 1 
 
 `http://localhost:8080/api/earning/1/daily`
+
+All work and no playt makes Erk a dull boy
