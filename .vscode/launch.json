@@ -5,7 +5,7 @@
                 "type": "node",
                 "request": "launch",
                 "name": "Miner Guard",
-                "program": "${workspaceRoot}/server.js"
+                "program": "${workspaceRoot}/backend/server.js"
             }
         ]
     }

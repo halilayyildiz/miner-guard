@@ -1,0 +1,10 @@
+<div style="text-align:center">
+    <h1>
+        {{ title }}
+    </h1>
+</div>
+<div>
+    <h3 class="first">Single</h3>
+    <p-dropdown [options]="users" [(ngModel)]="selectedUser" placeholder="Select a user" optionLabel="name"></p-dropdown>
+    <p>Selected City: {{ selectedUser ? selectedUser.name : 'none'}}</p>
+</div>
