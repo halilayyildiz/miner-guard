@@ -4,7 +4,17 @@
     </h1>
 </div>
 <div>
-    <h3 class="first">Single</h3>
-    <p-dropdown [options]="users" [(ngModel)]="selectedUser" placeholder="Select a user" optionLabel="name"></p-dropdown>
-    <p>Selected City: {{ selectedUser ? selectedUser.name : 'none'}}</p>
+    <h3 class="first">Select User</h3>
+    <p-dropdown [options]="users" [(ngModel)]="selectedUser" (onChange)="loadUserDailyEarnings()" placeholder="Select a user" optionLabel="name"></p-dropdown>
 </div>
+
+<div *ngIf="earnings">
+    <p-dataTable [value]="earnings">
+        <p-column field="date" header="Day"></p-column>
+        <p-column field="earnedBTC" header="BTC"></p-column>
+        <p-column field="earnedUSD" header="USD"></p-column>
+        <p-column field="earnedTotal" header="TotalBTC"></p-column>
+    </p-dataTable>
+</div>
+
+<mg-messages></mg-messages>

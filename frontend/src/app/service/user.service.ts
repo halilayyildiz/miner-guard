@@ -5,19 +5,28 @@ import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { MessageService } from './message.service';
-import { Earning } from '../domain/earning';
+import { User } from '../domain/user';
 
 @Injectable()
-export class EarningService {
+export class UserService {
 
     constructor(private messageService: MessageService, private http: HttpClient) { }
 
-    getUserDailyEarnings(userId: number): Observable<Earning[]> {
-        const url = `/api/earning/${userId}/daily`;
-        return this.http.get<Earning[]>(url)
+    getAllUsers(): Observable<User[]> {
+        const url = '/api/user/all';
+        return this.http.get<User[]>(url)
             .pipe(
-            tap(_ => this.log(`fetched earnings of user id=${userId}`)),
-            catchError(this.handleError('getUserDailyEarnings', []))
+            tap(_ => this.log(`fetched all users`)),
+            catchError(this.handleError('getAllUsers', []))
+            );
+    }
+
+    getUser(id: number): Observable<User> {
+        const url = `/api/user/${id}`;
+        return this.http.get<User>(url)
+            .pipe(
+            tap(_ => this.log(`fetched user id= ${id}`)),
+            catchError(this.handleError('getUser', []))
             );
     }
 

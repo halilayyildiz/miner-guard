@@ -3,10 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { EarningComponent } from './pages/earning/earning.component';
 
-
 const routes: Routes = [
-    { path: '', redirectTo: '/earning', pathMatch: 'full' },
-    { path: 'earning', component: EarningComponent }
+    { path: '', redirectTo: '/earnings/user', pathMatch: 'full' },
+    { path: 'earnings/user', component: EarningComponent },
+    { path: 'earnings/user/:id', component: EarningComponent }
 ];
 
 @NgModule({

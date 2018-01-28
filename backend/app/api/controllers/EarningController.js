@@ -25,24 +25,14 @@ exports.listDailyEarning = async function(req, res) {
 
     let earningList = await dbManager.getUserDailyEarnings(req.params.userId);
 
-    let result = {
-        "btc": currencyService.getBitcoinPrice(),
-        "earnings": []
-    };
+    let result = [];
     for (var i = 0; i < earningList.length - 1; i++) {
-
-        result.earnings[i] = {
-            "day": earningList[i].day,
-            "earned": {
-                "btc": util.roundPrice(earningList[i].earned - earningList[i + 1].earned),
-                "usd": util.roundPriceUSD((earningList[i].earned - earningList[i + 1].earned) * currencyService.getBitcoinPrice()),
-            },
-            "total": {
-                "btc": util.roundPrice(earningList[i].earned),
-                "usd": util.roundPriceUSD(earningList[i].earned * currencyService.getBitcoinPrice()),
-            }
-        };
-    }
-
+        result[i] = {
+            "date": earningList[i].day,
+            "earnedBTC": util.roundPrice(earningList[i].earned - earningList[i + 1].earned),
+            "earnedUSD": util.roundPriceUSD((earningList[i].earned - earningList[i + 1].earned) * currencyService.getBitcoinPrice()),
+            "earnedTotal": util.roundPrice(earningList[i].earned),
+        }
+    };
     res.json(result);
 };

@@ -18,7 +18,9 @@ app.get("/", function(req, res) {
 });
 
 // register routes
+var userRoutes = require('./app/api/routes/UserRoutes.js');
 var earningRoutes = require('./app/api/routes/EarningRoutes.js');
+app.use('/api/user', userRoutes);
 app.use('/api/earning', earningRoutes);
 
 // register not found page

@@ -7,6 +7,7 @@ var Wallet = require('./../model/wallet.js');
 module.exports = {
     connectDatabase: connectDatabase,
     getAllUsers: getAllUsers,
+    getUser: getUser,
     getUserWallets: getUserWallets,
     getUserHourlyEarnings: getUserHourlyEarnings,
     getUserDailyEarnings: getUserDailyEarnings,
@@ -27,6 +28,19 @@ function connectDatabase() {
             console.log('Connected to the miner database.');
             return resolve();
         });
+    })
+}
+
+function getUser(userId) {
+    return new Promise((resolve, reject) => {
+        db.get('SELECT * FROM user WHERE id = ? ORDER BY id', [userId], (err, row) => {
+            if (err) {
+                return reject(err)
+            }
+
+            let result = new User(row.ID, row.NAME, row.EMAIL, row.PHONE, row.MINER_COUNT);
+            return resolve(result);
+        })
     })
 }
 

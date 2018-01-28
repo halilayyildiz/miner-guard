@@ -5,18 +5,28 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 
 
-import { DropdownModule } from 'primeng/dropdown';
-
 import { AppComponent } from './app.component';
-
 import { AppRoutingModule } from './app-routing.module';
+
+// prime=ng modules
+import { DropdownModule } from 'primeng/dropdown';
+import { DataTableModule } from 'primeng/datatable';
+
+// components
+import { MessagesComponent } from './components/messages/messages.component';
 import { EarningComponent } from './pages/earning/earning.component';
+
+// services
+import { MessageService } from './service/message.service';
 import { EarningService } from './service/earning.service';
+import { UserService } from './service/user.service';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    MessagesComponent,
     EarningComponent
   ],
   imports: [
@@ -25,9 +35,12 @@ import { EarningService } from './service/earning.service';
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
-    DropdownModule
+    DropdownModule,
+    DataTableModule
   ],
   providers: [
+    MessageService,
+    UserService,
     EarningService
   ],
   bootstrap: [AppComponent]
