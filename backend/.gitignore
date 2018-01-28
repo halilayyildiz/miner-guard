@@ -58,3 +58,6 @@ typings/
 .env
 
 app/db/miner.db
+
+# auto generated frontend content
+webui
