@@ -10,7 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 // prime=ng modules
 import { DropdownModule } from 'primeng/dropdown';
-import { DataTableModule } from 'primeng/datatable';
+import { TableModule } from 'primeng/table';
 import { CardModule } from 'primeng/card';
 
 
@@ -38,7 +38,7 @@ import { UserService } from './service/user.service';
     FormsModule,
     HttpClientModule,
     DropdownModule,
-    DataTableModule,
+    TableModule,
     CardModule
   ],
   providers: [

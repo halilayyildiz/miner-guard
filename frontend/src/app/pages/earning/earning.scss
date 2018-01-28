@@ -12,3 +12,11 @@
         border-radius: 2px;
     }
 }
+
+/deep/ div.ui-table.ui-widget {
+    font-size: small;
+}
+
+/deep/ .ui-widget {
+    font-size: small;
+}

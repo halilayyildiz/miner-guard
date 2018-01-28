@@ -1,25 +1,37 @@
-<div style="text-align:center">
-    <h1>
-        {{ title }}
-    </h1>
+<div style="max-width:640px; margin:0px auto;">
+    <div style="text-align:center">
+        <h2>
+            {{ title }}
+        </h2>
+    </div>
+
+    <p-card>
+        <div>
+            <p-dropdown [options]="users" [(ngModel)]="selectedUser" (onChange)="loadUserDailyEarnings()" placeholder="Select a user" optionLabel="name"></p-dropdown>
+        </div>
+    </p-card>
+    <p-card *ngIf="earnings">
+        <div>
+            <p-table [value]="earnings">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Date</th>
+                        <th>BTC</th>
+                        <th>USD</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-earning>
+                    <tr>
+                        <td>{{earning.date}}</td>
+                        <td>{{earning.earnedBTC}}</td>
+                        <td>{{earning.earnedUSD}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </p-card>
+
+    <p-card>
+        <mg-messages></mg-messages>
+    </p-card>
 </div>
-
-<p-card>
-    <div>
-        <p-dropdown [options]="users" [(ngModel)]="selectedUser" (onChange)="loadUserDailyEarnings()" placeholder="Select a user" optionLabel="name"></p-dropdown>
-    </div>
-</p-card>
-<p-card *ngIf="earnings">
-    <div>
-        <p-dataTable [value]="earnings">
-            <p-column field="date" header="DAY"></p-column>
-            <p-column field="earnedBTC" header="BTC"></p-column>
-            <p-column field="earnedUSD" header="USD"></p-column>
-            <p-column field="earnedTotal" header="TOTAL BTC"></p-column>
-        </p-dataTable>
-    </div>
-</p-card>
-
-<p-card>
-    <mg-messages></mg-messages>
-</p-card>
