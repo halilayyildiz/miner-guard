@@ -11,6 +11,8 @@ import { AppRoutingModule } from './app-routing.module';
 // prime=ng modules
 import { DropdownModule } from 'primeng/dropdown';
 import { DataTableModule } from 'primeng/datatable';
+import { CardModule } from 'primeng/card';
+
 
 // components
 import { MessagesComponent } from './components/messages/messages.component';
@@ -36,7 +38,8 @@ import { UserService } from './service/user.service';
     FormsModule,
     HttpClientModule,
     DropdownModule,
-    DataTableModule
+    DataTableModule,
+    CardModule
   ],
   providers: [
     MessageService,

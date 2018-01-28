@@ -1,8 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { MessageService } from '../../service/message.service';
+
+import { Observable } from 'rxjs/Observable';
+import { catchError, map, tap, flatMap } from 'rxjs/operators';
+
+import { of } from 'rxjs/observable/of';
 
 import { Earning } from './../../domain/earning';
+import { MessageService } from '../../service/message.service';
 import { UserService } from './../../service/user.service';
 import { EarningService } from './../../service/earning.service';
 import { User } from '../../domain/user';
@@ -18,9 +23,8 @@ export class EarningComponent {
 
     selectedUser: User;
     users: User[];
-    title: string = 'Miner Earnings';
+    title = 'User Earnings';
     earnings: Earning[];
-    cols: any[];
 
     loadAllUsers() {
         this.userService.getAllUsers()
@@ -37,20 +41,21 @@ export class EarningComponent {
         this.activatedRoute.params.subscribe((params: Params) => {
             const userId = params['id'];
             if (userId) {
-                console.log(userId);
-
-                this.userService.getUser(userId)
-                    .subscribe(user => this.selectedUser = user);
+                this.userService.getAllUsers()
+                    .pipe(
+                    flatMap(users => {
+                        this.users = users;
+                        return this.userService.getUser(userId);
+                    }))
+                    .pipe(
+                    flatMap(user => {
+                        this.selectedUser = user;
+                        return this.earningService.getUserDailyEarnings(userId);
+                    }))
+                    .subscribe(earnings => this.earnings = earnings);
+            } else {
+                this.loadAllUsers();
             }
         });
-
-        this.loadAllUsers();
-
-        this.cols = [
-            { field: 'date', header: 'Day' },
-            { field: 'earnedBTC', header: 'Earned BTC' },
-            { field: 'earnedUSD', header: 'Earned USD' },
-            { field: 'earnedTotal', header: 'Total' }
-        ];
     }
 }
