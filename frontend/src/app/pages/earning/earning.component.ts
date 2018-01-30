@@ -43,7 +43,7 @@ export class EarningComponent {
     }
 
     prepareChartData(earnings: Earning[]) {
-        const count = Math.min(earnings.length, this.chartDataMaxCount);
+        const count = Math.min(earnings.length - 1, this.chartDataMaxCount);
 
         this.chartData = {
             labels: [],
@@ -57,8 +57,8 @@ export class EarningComponent {
         };
 
         for (let i = 0; i < count; i++) {
-            this.chartData.labels[count - (i + 1)] = earnings[i].date.substring(8, 10);
-            this.chartData.datasets[0].data[count - (i + 1)] = earnings[i].earnedUSD;
+            this.chartData.labels[count - (i + 1)] = earnings[i + 1].date.substring(8, 10);
+            this.chartData.datasets[0].data[count - (i + 1)] = earnings[i + 1].earnedUSD;
         }
 
         this.chartOptions = {
