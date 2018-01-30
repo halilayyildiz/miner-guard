@@ -12,7 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { DropdownModule } from 'primeng/dropdown';
 import { TableModule } from 'primeng/table';
 import { CardModule } from 'primeng/card';
-
+import { ChartModule } from 'primeng/chart';
 
 // components
 import { MessagesComponent } from './components/messages/messages.component';
@@ -39,7 +39,8 @@ import { UserService } from './service/user.service';
     HttpClientModule,
     DropdownModule,
     TableModule,
-    CardModule
+    CardModule,
+    ChartModule
   ],
   providers: [
     MessageService,

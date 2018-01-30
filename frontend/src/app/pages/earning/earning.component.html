@@ -1,16 +1,23 @@
 <div style="max-width:640px; margin:0px auto;">
     <div style="text-align:center">
-        <h2>
+        <h3>
             {{ title }}
-        </h2>
+        </h3>
     </div>
+
 
     <p-card>
         <div>
             <p-dropdown [options]="users" [(ngModel)]="selectedUser" (onChange)="loadUserDailyEarnings()" placeholder="Select a user" optionLabel="name"></p-dropdown>
         </div>
     </p-card>
+
     <p-card *ngIf="earnings">
+        <p-card>
+            <div>
+                <p-chart type="line" [data]="chartData" [options]="chartOptions"></p-chart>
+            </div>
+        </p-card>
         <div>
             <p-table [value]="earnings">
                 <ng-template pTemplate="header">
@@ -31,7 +38,7 @@
         </div>
     </p-card>
 
-    <p-card>
+    <!-- <p-card>
         <mg-messages></mg-messages>
-    </p-card>
+    </p-card> -->
 </div>

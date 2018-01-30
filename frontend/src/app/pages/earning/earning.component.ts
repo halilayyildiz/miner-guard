@@ -25,6 +25,9 @@ export class EarningComponent {
     users: User[];
     title = 'User Earnings';
     earnings: Earning[];
+    chartData: any;
+    chartOptions: any;
+    chartDataMaxCount = 10;
 
     loadAllUsers() {
         this.userService.getAllUsers()
@@ -33,7 +36,49 @@ export class EarningComponent {
 
     loadUserDailyEarnings() {
         this.earningService.getUserDailyEarnings(this.selectedUser.id)
-            .subscribe(earnings => this.earnings = earnings);
+            .subscribe(earnings => {
+                this.earnings = earnings;
+                this.prepareChartData(earnings);
+            });
+    }
+
+    prepareChartData(earnings: Earning[]) {
+        const count = Math.min(earnings.length, this.chartDataMaxCount);
+
+        this.chartData = {
+            labels: [],
+            datasets: [{
+                label: 'Earning (USD)',
+                data: [],
+                fill: false,
+                borderColor: '#EE4444',
+                borderWidth: 2
+            }]
+        };
+
+        for (let i = 0; i < count; i++) {
+            this.chartData.labels[count - (i + 1)] = earnings[i].date.substring(8, 10);
+            this.chartData.datasets[0].data[count - (i + 1)] = earnings[i].earnedUSD;
+        }
+
+        this.chartOptions = {
+            legend: {
+                position: 'top',
+                display: true
+            },
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        fontSize: 11
+                    }
+                }],
+                yAxes: [{
+                    ticks: {
+                        fontSize: 11
+                    }
+                }]
+            }
+        };
     }
 
     ngOnInit() {
@@ -52,7 +97,10 @@ export class EarningComponent {
                         this.selectedUser = user;
                         return this.earningService.getUserDailyEarnings(userId);
                     }))
-                    .subscribe(earnings => this.earnings = earnings);
+                    .subscribe(earnings => {
+                        this.earnings = earnings;
+                        this.prepareChartData(earnings);
+                    });
             } else {
                 this.loadAllUsers();
             }
