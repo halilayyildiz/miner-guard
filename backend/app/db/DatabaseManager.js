@@ -1,6 +1,6 @@
 const sqlite3 = require('sqlite3').verbose();
-var moment = require('moment');
 var moment = require('moment-timezone');
+var logger = require('./../service/LoggingService.js');
 var User = require('./../model/user.js');
 var Wallet = require('./../model/wallet.js');
 
@@ -124,12 +124,12 @@ function getUserDailyEarnings(userId) {
 
 function updateWalletTotalEarning(walletAddress, totalEarned) {
     db.run("UPDATE WALLET SET TOTAL_EARNED = ? WHERE ADDRESS = ?", [totalEarned, walletAddress]);
-    console.log('Wallet ... ' + walletAddress + ' ... ' + totalEarned);
+    logger.log('WALLET UPDATE', walletAddress + ' : ' + totalEarned)
 }
 
-function updateUserTotalEarning(user, totalEarning) {
+function updateUserTotalEarning(user, totalEarned) {
     var datetime = moment().tz('Europe/Istanbul').format("YYYY-MM-DD HH:mm:ss.SSS");
 
-    db.run("INSERT INTO USER_EARNING(USER_ID, TOTAL_EARNING, DATETIME) VALUES(?,?,?)", [user.id, totalEarning, datetime]);
-    console.log(datetime + ' ... ' + user.name + ' ... ' + totalEarning);
+    db.run("INSERT INTO USER_EARNING(USER_ID, TOTAL_EARNING, DATETIME) VALUES(?,?,?)", [user.id, totalEarned, datetime]);
+    logger.log('EARNING UPDATE', user.name + ' : ' + totalEarned);
 }

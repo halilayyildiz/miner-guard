@@ -1,6 +1,8 @@
 var rp = require('request-promise');
-var dbManager = require('./../db/DatabaseManager.js');
 var constants = require('./../conf/constants');
+var dbManager = require('./../db/DatabaseManager.js');
+var logger = require('./LoggingService.js');
+
 
 module.exports = {
     getWalletStatus: getWalletStatus

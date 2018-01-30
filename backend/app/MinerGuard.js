@@ -1,8 +1,7 @@
 var dbManager = require('./db/DatabaseManager.js');
 var poolService = require('./service/PoolService.js');
 var currencyService = require('./service/CurrencyService.js');
-var User = require('./model/user.js');
-var Wallet = require('./model/wallet.js');
+var logger = require('./service/LoggingService.js');
 
 module.exports = {
     checkStatus: checkStatus,
@@ -32,14 +31,17 @@ async function checkStatus() {
     for (var i = 0; i < users.length; i++) {
         users[i].totalEarning = 0;
         users[i].activeMinerCount = 0;
+
+        logger.log('-------------------------', users[i].name);
         for (var j = 0; j < users[i].wallets.length; j++) {
             try {
+                logger.log('WALLET READ', users[i].wallets[j].address);
                 let walletData = await poolService.getWalletStatus(users[i].wallets[j].address)
                     .catch(err => {
                         console.log(err);
                     });
 
-                if (walletData.balance) {
+                if (walletData.total_earned) {
                     // update miner earnings
                     dbManager.updateWalletTotalEarning(users[i].wallets[j].address, walletData.total_earned);
 
