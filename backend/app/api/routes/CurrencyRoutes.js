@@ -1,5 +1,5 @@
 var express = require('express');
-var currencyController = require('./../controllers/currencyController');
+var currencyController = require('./../controllers/CurrencyController');
 
 var router = express.Router();
 
