@@ -22,7 +22,7 @@ async function startup() {
 async function checkStatus() {
 
     // update bitcoin price
-    await currencyService.refreshBitcoinPrice();
+    await currencyService.updateBitcoinPrice();
 
     // get users
     let users = await getUserWithWallets();

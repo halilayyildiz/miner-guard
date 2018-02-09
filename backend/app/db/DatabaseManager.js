@@ -12,7 +12,9 @@ module.exports = {
     getUserHourlyEarnings: getUserHourlyEarnings,
     getUserDailyEarnings: getUserDailyEarnings,
     updateWalletTotalEarning: updateWalletTotalEarning,
-    updateUserTotalEarning: updateUserTotalEarning
+    updateUserTotalEarning: updateUserTotalEarning,
+    updateBitcoinPrice: updateBitcoinPrice,
+    getBitcoinPrice: getBitcoinPrice
 }
 
 let db;
@@ -132,4 +134,28 @@ function updateUserTotalEarning(user, totalEarned) {
 
     db.run("INSERT INTO USER_EARNING(USER_ID, TOTAL_EARNING, DATETIME) VALUES(?,?,?)", [user.id, totalEarned, datetime]);
     logger.log('EARNING UPDATE', user.name + ' : ' + totalEarned);
+}
+
+function updateBitcoinPrice(price_usd) {
+    var date = moment().tz('Europe/Istanbul').format("YYYY-MM-DD");
+
+    db.run("INSERT OR REPLACE INTO BITCOIN_PRICE(DATE, PRICE_USD) VALUES(?,?)", [date, price_usd]);
+    logger.log('BITCOIN PRICE UPDATE : ', price_usd);
+}
+
+function getBitcoinPrice(date) {
+    return new Promise((resolve, reject) => {
+        db.get('SELECT PRICE_USD FROM BITCOIN_PRICE WHERE date = ?', [date], (err, row) => {
+            if (err) {
+                return reject(err)
+            }
+
+            let result = undefined;
+            if (row) {
+                result = row.PRICE_USD;
+            }
+
+            return resolve(result);
+        })
+    })
 }

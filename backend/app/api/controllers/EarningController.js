@@ -27,10 +27,11 @@ exports.listDailyEarning = async function(req, res) {
 
     let result = [];
     for (var i = 0; i < earningList.length - 1; i++) {
+        let bitcoinPriceOfDay = await currencyService.getBitcoinPriceOfDay(earningList[i].day);
         result[i] = {
             "date": earningList[i].day,
             "earnedBTC": util.roundPrice(earningList[i].earned - earningList[i + 1].earned),
-            "earnedUSD": util.roundPriceUSD((earningList[i].earned - earningList[i + 1].earned) * currencyService.getBitcoinPrice()),
+            "earnedUSD": util.roundPriceUSD((earningList[i].earned - earningList[i + 1].earned) * bitcoinPriceOfDay),
             "earnedTotal": util.roundPrice(earningList[i].earned),
         }
     };
