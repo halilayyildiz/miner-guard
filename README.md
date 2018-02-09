@@ -2,7 +2,7 @@
 Cryptocurrency Miner Pool Status Checker
 
 ## About
-This application simply checks earnings of the miners on ahashpool. Supports multiple users and periodically updates miner earnings via pool service API.
+This application simply checks earnings of the miners on [Ahashpool](ahashpool.com). Supports multiple users and periodically updates miner earnings via pool service API.
 
 ## Demo
 I am simply hosting this application on DigitalOcean Ubuntu droplet. You can access the demo app via the link below:
