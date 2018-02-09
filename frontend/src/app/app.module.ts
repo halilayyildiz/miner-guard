@@ -22,7 +22,7 @@ import { EarningComponent } from './pages/earning/earning.component';
 import { MessageService } from './service/message.service';
 import { EarningService } from './service/earning.service';
 import { UserService } from './service/user.service';
-
+import { CurrencyService } from './service/currency.service';
 
 
 @NgModule({
@@ -45,7 +45,8 @@ import { UserService } from './service/user.service';
   providers: [
     MessageService,
     UserService,
-    EarningService
+    EarningService,
+    CurrencyService
   ],
   bootstrap: [AppComponent]
 })

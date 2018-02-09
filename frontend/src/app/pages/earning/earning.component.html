@@ -8,6 +8,10 @@
 
     <p-card>
         <div>
+            <span>BTC : {{ bitcoinPrice }}</span>
+        </div>
+        <div class="customHr"><span>.</span></div>
+        <div>
             <p-dropdown [options]="users" [(ngModel)]="selectedUser" (onChange)="loadUserDailyEarnings()" placeholder="Select a user" optionLabel="name"></p-dropdown>
         </div>
     </p-card>

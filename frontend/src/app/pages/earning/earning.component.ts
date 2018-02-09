@@ -3,14 +3,16 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { Observable } from 'rxjs/Observable';
 import { catchError, map, tap, flatMap } from 'rxjs/operators';
-
 import { of } from 'rxjs/observable/of';
 
-import { Earning } from './../../domain/earning';
 import { MessageService } from '../../service/message.service';
 import { UserService } from './../../service/user.service';
 import { EarningService } from './../../service/earning.service';
+import { CurrencyService } from './../../service/currency.service';
+
 import { User } from '../../domain/user';
+import { Earning } from './../../domain/earning';
+
 
 @Component({
     selector: 'mg-earning-page',
@@ -19,7 +21,11 @@ import { User } from '../../domain/user';
 })
 
 export class EarningComponent {
-    constructor(private activatedRoute: ActivatedRoute, public userService: UserService, private earningService: EarningService) { }
+    constructor(
+        private activatedRoute: ActivatedRoute,
+        public userService: UserService,
+        private earningService: EarningService,
+        private currencyService: CurrencyService) { }
 
     selectedUser: User;
     users: User[];
@@ -28,6 +34,7 @@ export class EarningComponent {
     chartData: any;
     chartOptions: any;
     chartDataMaxCount = 10;
+    bitcoinPrice = 0;
 
     loadAllUsers() {
         this.userService.getAllUsers()
@@ -104,6 +111,11 @@ export class EarningComponent {
             } else {
                 this.loadAllUsers();
             }
+
+            this.currencyService.getBitcoinPrice()
+                .subscribe(
+                price => this.bitcoinPrice = price
+                );
         });
     }
 }

@@ -20,3 +20,13 @@
 /deep/ .ui-widget {
     font-size: small;
 }
+
+.customHr {
+    width: 95%;
+    font-size: 1px;
+    color: rgba(0, 0, 0, 0);
+    line-height: 1px;
+    background-color: grey;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
