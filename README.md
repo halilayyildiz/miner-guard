@@ -15,10 +15,10 @@ Component         | Technology
 ---               | ---
 Frontend          | [Angular 5](https://github.com/angular/angular), [PrimeNG](https://www.primefaces.org/primeng/)
 Backend           | [NodeJS](https://nodejs.org), [Express](https://expressjs.com/)
-Security          | Token Based (Spring Security and [JWT](https://github.com/auth0/java-jwt) ) 
-Persistence       | Sqlite (https://www.npmjs.com/package/sqlite3)
-Client Build Tools| [angular-cli](https://github.com/angular/angular-cli), npm
-Server Runtime    | Nginx, PM2
+Security          | Token Based ([JWT](https://github.com/auth0/java-jwt) ) 
+Persistence       | [Sqlite](https://www.npmjs.com/package/sqlite3)
+Client Build Tools| [angular-cli](https://github.com/angular/angular-cli), [npm](https://www.npmjs.com/)
+Server Runtime    | [Nginx](https://www.nginx.com/), [PM2](http://pm2.keymetrics.io/)
 
 
 ## Project Structure
@@ -59,7 +59,7 @@ PROJECT_FOLDER
 - Angular-cli 1.6.3
 - PM2 & Nginx
 
-## How to build $ run
+## How to build & run
 
 Start with building the backend code. It is node.js application, so installing the dependencies is enough.
 
@@ -88,14 +88,22 @@ pm2 show server
 ```
 
 
+## Application APIs
+
+Daily Earnings
+
+`http://miner.halilayyildiz.com/api/earning/1/daily/`
+
+User Details
+
+`http://miner.halilayyildiz.com/api/user/all/`
+`http://miner.halilayyildiz.com/api/user/1/`
+
+Currency Rates
+
+`http://miner.halilayyildiz.com/api/currency/price/btcusd/`
 
 
-## API Usage
+## Screenshots
 
-Get hourly earnings of user with id = 1 
 
-`http://localhost:8080/api/earning/1/hourly`
-
-Get daily earnings of user with id = 1 
-
-`http://localhost:8080/api/earning/1/daily`
