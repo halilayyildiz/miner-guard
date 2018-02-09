@@ -2,7 +2,7 @@
 Cryptocurrency Miner Pool Status Checker
 
 ## About
-This application simply checks earnings of the miners on ahashpool. Supports multiple users and periodically updates miner earnings via pool service API.
+This application simply checks earnings of the miners on [Ahashpool](http://ahashpool.com). Supports multiple users and periodically updates miner earnings via pool service API.
 
 ## Demo
 I am simply hosting this application on DigitalOcean Ubuntu droplet. You can access the demo app via the link below:
@@ -92,17 +92,25 @@ pm2 show server
 
 Daily Earnings
 
-`http://miner.halilayyildiz.com/api/earning/1/daily/`
+```bash
+# list daily earnings of user with id '1'
+http://miner.halilayyildiz.com/api/earning/1/daily/
+```
 
 User Details
 
-`http://miner.halilayyildiz.com/api/user/all/`
-`http://miner.halilayyildiz.com/api/user/1/`
+```bash
+# list all users
+http://miner.halilayyildiz.com/api/user/all/
+# list detail of user with id '1'
+http://miner.halilayyildiz.com/api/user/1/
+```
 
 Currency Rates
-
-`http://miner.halilayyildiz.com/api/currency/price/btcusd/`
-
+```bash
+# get current bitcoin price
+http://miner.halilayyildiz.com/api/currency/price/btcusd/
+```
 
 ## Screenshots
 
