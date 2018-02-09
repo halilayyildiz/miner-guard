@@ -1,44 +1,47 @@
+<meta http-equiv="refresh" content="60">
 <div style="max-width:640px; margin:0px auto;">
-    <div style="text-align:center">
-        <h3>
-            {{ title }}
-        </h3>
+    <div class="earningsTitle">
+        <span>{{ title }}</span>
     </div>
 
 
     <p-card>
         <div>
-            <span>BTC : {{ bitcoinPrice }}</span>
-        </div>
-        <div class="customHr"><span>.</span></div>
-        <div>
-            <p-dropdown [options]="users" [(ngModel)]="selectedUser" (onChange)="loadUserDailyEarnings()" placeholder="Select a user" optionLabel="name"></p-dropdown>
+            <span class="bitcoinLabel">BTCUSD :</span>
+            <span class="bitcoinValue">{{ bitcoinPrice }}</span>
         </div>
     </p-card>
 
-    <p-card *ngIf="earnings">
-        <p-card>
-            <div>
-                <p-chart type="line" [data]="chartData" [options]="chartOptions"></p-chart>
-            </div>
-        </p-card>
+    <p-card>
         <div>
-            <p-table [value]="earnings">
-                <ng-template pTemplate="header">
-                    <tr>
-                        <th>Date</th>
-                        <th>BTC</th>
-                        <th>USD</th>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-earning>
-                    <tr>
-                        <td>{{earning.date}}</td>
-                        <td>{{earning.earnedBTC}}</td>
-                        <td>{{earning.earnedUSD}}</td>
-                    </tr>
-                </ng-template>
-            </p-table>
+            <p-dropdown [options]="users" [(ngModel)]="selectedUser" (onChange)="loadUserDailyEarnings()" placeholder="Select a user" optionLabel="name"></p-dropdown>
+        </div>
+        <div class="customHr"><span></span></div>
+
+        <div *ngIf="earnings">
+            <p-card>
+                <div>
+                    <p-chart type="line" [data]="chartData" [options]="chartOptions"></p-chart>
+                </div>
+            </p-card>
+            <div>
+                <p-table [value]="earnings">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Date</th>
+                            <th>BTC</th>
+                            <th>USD</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-earning>
+                        <tr>
+                            <td>{{earning.date}}</td>
+                            <td>{{earning.earnedBTC}}</td>
+                            <td>{{earning.earnedUSD}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
         </div>
     </p-card>
 

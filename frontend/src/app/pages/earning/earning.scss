@@ -21,6 +21,15 @@
     font-size: small;
 }
 
+.earningsTitle {
+    color: mediumblue;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+    margin: 20px;
+}
+
 .customHr {
     width: 95%;
     font-size: 1px;
@@ -29,4 +38,14 @@
     background-color: grey;
     margin-top: 10px;
     margin-bottom: 20px;
+}
+
+.bitcoinLabel {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.bitcoinValue {
+    color: crimson;
+    font-weight: bold;
 }

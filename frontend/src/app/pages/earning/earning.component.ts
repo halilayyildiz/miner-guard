@@ -33,7 +33,7 @@ export class EarningComponent {
     earnings: Earning[];
     chartData: any;
     chartOptions: any;
-    chartDataMaxCount = 10;
+    chartDataMaxCount = 15;
     bitcoinPrice = 0;
 
     loadAllUsers() {
