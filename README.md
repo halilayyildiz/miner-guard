@@ -106,6 +106,6 @@ Currency Rates
 
 ## Screenshots
 
-![UserEarnings](/screenshots/user_earnings_page.png?raw=true)
+![UserEarnings](/screenshots/user_earning_page.png?raw=true)
 
 
