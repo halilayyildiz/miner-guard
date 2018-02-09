@@ -97,6 +97,7 @@ Daily Earnings
 User Details
 
 `http://miner.halilayyildiz.com/api/user/all/`
+
 `http://miner.halilayyildiz.com/api/user/1/`
 
 Currency Rates
