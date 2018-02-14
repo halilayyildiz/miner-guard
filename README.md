@@ -34,7 +34,7 @@ PROJECT_FOLDER
 │     │  MinerGuard.js 
 │     └──[api]
 │     │  └──[routes]          # route definitions
-│     │  └──[controllers]     # controllers implementations for APIs
+│     │  └──[controllers]     # controller implementations for APIs
 │     └──[conf]               # configuration files
 │     └──[db]                 # database scripts, migration folder etc
 │     └──[model]              # Data model objects
@@ -43,7 +43,7 @@ PROJECT_FOLDER
 │
 └──[frontend]
    │  package.json     
-   │  angular-cli.json        # ng build configurations)
+   │  angular-cli.json        # ng build configurations
    └──[node_modules]
    └──[src]                   # frontend source files
    └──[dist]                  # frontend build files, auto-created after running angular build: ng -build
