@@ -35,18 +35,18 @@ async function checkStatus() {
         logger.log('-------------------------', users[i].name);
         for (var j = 0; j < users[i].wallets.length; j++) {
             try {
-                logger.log('WALLET READ', users[i].wallets[j].address);
-                let walletData = await poolService.getWalletStatus(users[i].wallets[j].address)
+                logger.log('WALLET READ', users[i].wallets[j].pool + ' - ' + users[i].wallets[j].address);
+                let walletData = await poolService.getWalletStatus(users[i].wallets[j])
                     .catch(err => {
                         console.log(err);
                     });
 
                 if (walletData.total_earned) {
                     // update miner earnings
-                    dbManager.updateWalletTotalEarning(users[i].wallets[j].address, walletData.total_earned);
+                    dbManager.updateWalletTotalEarning(users[i].wallets[j], walletData.total_earned);
 
                     users[i].totalEarning += walletData.total_earned;
-                    users[i].activeMinerCount += walletData.miners.length;
+                    users[i].activeMinerCount += walletData.miners_count;
                 }
             } catch (error) {
                 console.log(err);

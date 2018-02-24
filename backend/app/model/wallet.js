@@ -1,6 +1,7 @@
 class Wallet {
-    constructor(address, userId, totalEarned) {
+    constructor(address, pool, userId, totalEarned) {
         this.address = address;
+        this.pool = pool;
         this.userId = userId;
         this.totalEarned = totalEarned;
     }

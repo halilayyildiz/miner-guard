@@ -10,8 +10,8 @@ module.exports = {
 
 var bitcoinPrice = 0;
 
-async function getWalletStatus(walletAddress) {
-    var walletURL = constants.AHASHPOOL_WALLET_SERVICE_PREFIX + walletAddress;
+async function getWalletStatus(wallet) {
+    var walletURL = constants.POOL[wallet.pool].WALLET_URL + wallet.address;
 
     let response = await rp(walletURL)
         .catch(err => {
@@ -20,5 +20,19 @@ async function getWalletStatus(walletAddress) {
         });
 
     let walletData = JSON.parse(response);
+    return parseWalletData(wallet.pool, walletData);
+}
+
+function parseWalletData(pool, data) {
+    let walletData = {};
+
+    if (pool == 'ZPOOL') {
+        walletData.total_earned = data.total;
+        walletData.miner_count = data.miners.length;
+    } else if (pool == 'AHASH') {
+        walletData.total_earned = data.total_earned;
+        walletData.miner_count = data.miners.length;
+    }
+
     return walletData;
 }

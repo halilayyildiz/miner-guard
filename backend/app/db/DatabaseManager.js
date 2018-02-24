@@ -72,7 +72,7 @@ function getUserWallets(userId) {
 
             let result = [];
             for (let i = 0; i < rows.length; i++) {
-                result[i] = new Wallet(rows[i].ADDRESS, rows[i].USER_ID, rows[i].TOTAL_EARNED);
+                result[i] = new Wallet(rows[i].ADDRESS, rows[i].POOL, rows[i].USER_ID, rows[i].TOTAL_EARNED);
             }
 
             return resolve(result);
@@ -124,9 +124,9 @@ function getUserDailyEarnings(userId) {
     })
 }
 
-function updateWalletTotalEarning(walletAddress, totalEarned) {
-    db.run("UPDATE WALLET SET TOTAL_EARNED = ? WHERE ADDRESS = ?", [totalEarned, walletAddress]);
-    logger.log('WALLET UPDATE', walletAddress + ' : ' + totalEarned)
+function updateWalletTotalEarning(wallet, totalEarned) {
+    db.run("UPDATE WALLET SET TOTAL_EARNED = ? WHERE ADDRESS = ? AND POOL = ?", [totalEarned, wallet.address, wallet.pool]);
+    logger.log('WALLET UPDATE', wallet.pool + ' - ' + wallet.address + ' : ' + totalEarned)
 }
 
 function updateUserTotalEarning(user, totalEarned) {
