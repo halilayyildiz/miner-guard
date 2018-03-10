@@ -66,8 +66,6 @@ Start with building the backend code. It is node.js application, so installing t
 ```bash
 # Navigate to PROJECT_FOLDER/backend (should contain package.json)
 npm install
-# build the project (this will put the files under dist folder)
-ng build --prod --aot=true
 ```
 
 Then navigate to frontend folder and install dependencies. As a last step you need to build project to copy binaries under backend static resource folder.
