@@ -12,15 +12,15 @@ var bitcoinPrice = 0;
 
 async function getWalletStatus(wallet) {
     var walletURL = constants.POOL[wallet.pool].WALLET_URL + wallet.address;
-
-    let response = await rp(walletURL)
-        .catch(err => {
-            console.log(err);
-            throw new Error("Unable to fetch wallet data !!!");
-        });
-
-    let walletData = JSON.parse(response);
-    return parseWalletData(wallet.pool, walletData);
+    let status = {};
+    try {
+        let response = await rp(walletURL);
+        let walletData = JSON.parse(response);
+        status = parseWalletData(wallet.pool, walletData);
+    } catch (err) {
+        throw new Error(`Unable to fetch/parse wallet: ${wallet.address}`);
+    }
+    return status;
 }
 
 function parseWalletData(pool, data) {

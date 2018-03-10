@@ -14,7 +14,9 @@ module.exports = {
     updateWalletTotalEarning: updateWalletTotalEarning,
     updateUserTotalEarning: updateUserTotalEarning,
     updateBitcoinPrice: updateBitcoinPrice,
-    getBitcoinPrice: getBitcoinPrice
+    getBitcoinPrice: getBitcoinPrice,
+    addWalletToUser: addWalletToUser,
+    removeWalletFromUser: removeWalletFromUser
 }
 
 let db;
@@ -156,6 +158,38 @@ function getBitcoinPrice(date) {
             }
 
             return resolve(result);
+        })
+    })
+}
+
+function addWalletToUser(userId, walletId) {
+    return new Promise((resolve, reject) => {
+
+        if (!userId || !walletId) {
+            return reject("FAIL: user or wallet id empty !");
+        }
+
+        db.run('INSERT INTO WALLET(USER_ID, ADDRESS, TOTAL_EARNED) VALUES(?, ?, 0)', [userId, walletId], (err, row) => {
+            if (err) {
+                return reject("" + err);
+            }
+            return resolve("DONE");
+        })
+    })
+}
+
+function removeWalletFromUser(userId, walletId) {
+    return new Promise((resolve, reject) => {
+
+        if (!userId || !walletId) {
+            return reject("FAIL: user or wallet id empty !");
+        }
+
+        db.run('DELETE FROM WALLET WHERE USER_ID = ? AND ADDRESS = ?', [userId, walletId], (err, row) => {
+            if (err) {
+                return reject("" + err);
+            }
+            return resolve("DONE");
         })
     })
 }

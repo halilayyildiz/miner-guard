@@ -16,9 +16,13 @@ app.use(express.static(path.join(__dirname, 'webui')));
 var userRoutes = require('./app/api/routes/UserRoutes.js');
 var earningRoutes = require('./app/api/routes/EarningRoutes.js');
 var currencyRoutes = require('./app/api/routes/CurrencyRoutes.js');
+var walletRoutes = require('./app/api/routes/WalletRoutes.js');
+
 app.use('/api/user', userRoutes);
 app.use('/api/earning', earningRoutes);
 app.use('/api/currency', currencyRoutes);
+app.use('/api/wallet', walletRoutes);
+
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {

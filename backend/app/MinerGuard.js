@@ -36,10 +36,7 @@ async function checkStatus() {
         for (var j = 0; j < users[i].wallets.length; j++) {
             try {
                 logger.log('WALLET READ', users[i].wallets[j].pool + ' - ' + users[i].wallets[j].address);
-                let walletData = await poolService.getWalletStatus(users[i].wallets[j])
-                    .catch(err => {
-                        console.log(err);
-                    });
+                let walletData = await poolService.getWalletStatus(users[i].wallets[j]);
 
                 if (walletData.total_earned) {
                     // update miner earnings
@@ -48,7 +45,7 @@ async function checkStatus() {
                     users[i].totalEarning += walletData.total_earned;
                     users[i].activeMinerCount += walletData.miners_count;
                 }
-            } catch (error) {
+            } catch (err) {
                 console.log(err);
                 continue;
             }

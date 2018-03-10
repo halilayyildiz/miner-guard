@@ -9,5 +9,8 @@ exports.getAllUsers = async function(req, res) {
 
 exports.getUser = async function(req, res) {
     let user = await dbManager.getUser(req.params.userId);
+    let userWallets = await dbManager.getUserWallets(req.params.userId);
+    user.wallets = userWallets;
+
     res.json(user);
 };
