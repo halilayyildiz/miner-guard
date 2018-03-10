@@ -95,15 +95,11 @@ export class EarningComponent {
             if (userId) {
                 this.userService.getAllUsers()
                     .pipe(
-                    flatMap(users => {
-                        this.users = users;
-                        return this.userService.getUser(userId);
-                    }))
-                    .pipe(
-                    flatMap(user => {
-                        this.selectedUser = user;
-                        return this.earningService.getUserDailyEarnings(userId);
-                    }))
+                        flatMap(users => {
+                            this.users = users;
+                            this.selectedUser = users.find(user => user.id = userId);
+                            return this.earningService.getUserDailyEarnings(userId);
+                        }))
                     .subscribe(earnings => {
                         this.earnings = earnings;
                         this.prepareChartData(earnings);
@@ -114,7 +110,7 @@ export class EarningComponent {
 
             this.currencyService.getBitcoinPrice()
                 .subscribe(
-                price => this.bitcoinPrice = price
+                    price => this.bitcoinPrice = price
                 );
         });
     }
