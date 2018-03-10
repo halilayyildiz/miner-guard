@@ -5,7 +5,7 @@ Cryptocurrency Miner Pool Status Checker
 This application simply checks earnings of the miners on [Ahashpool](http://ahashpool.com). Supports multiple users and periodically updates miner earnings via pool service API.
 
 ## Demo
-I am simply hosting this application on DigitalOcean Ubuntu droplet. You can access the demo app via the link below:
+Application is hosted on DigitalOcean Ubuntu droplet. You can access the demo app via the link below:
 
 [Miner Guard](http://miner.halilayyildiz.com/)
 
