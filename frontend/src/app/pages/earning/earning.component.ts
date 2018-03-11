@@ -97,7 +97,7 @@ export class EarningComponent {
                     .pipe(
                         flatMap(users => {
                             this.users = users;
-                            this.selectedUser = users.find(user => user.id = userId);
+                            this.selectedUser = users.find(user => user.id == userId);
                             return this.earningService.getUserDailyEarnings(userId);
                         }))
                     .subscribe(earnings => {
