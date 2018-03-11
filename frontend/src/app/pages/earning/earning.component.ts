@@ -49,6 +49,10 @@ export class EarningComponent {
             });
     }
 
+    setPeriodicRefresh() {
+        setInterval(() => { this.loadUserDailyEarnings(); }, 60000);
+    }
+
     prepareChartData(earnings: Earning[]) {
         const count = Math.min(earnings.length - 1, this.chartDataMaxCount);
 
@@ -113,5 +117,7 @@ export class EarningComponent {
                     price => this.bitcoinPrice = price
                 );
         });
+
+        this.setPeriodicRefresh();
     }
 }
