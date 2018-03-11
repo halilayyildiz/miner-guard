@@ -36,6 +36,14 @@ export class EarningComponent {
     chartDataMaxCount = 15;
     bitcoinPrice = 0;
 
+
+    setPeriodicRefresh() {
+        setInterval(() => {
+            this.loadUserDailyEarnings();
+            this.updateBitcoinPrice();
+        }, 60000);
+    }
+
     loadAllUsers() {
         this.userService.getAllUsers()
             .subscribe(users => this.users = users);
@@ -49,8 +57,11 @@ export class EarningComponent {
             });
     }
 
-    setPeriodicRefresh() {
-        setInterval(() => { this.loadUserDailyEarnings(); }, 60000);
+    updateBitcoinPrice() {
+        this.currencyService.getBitcoinPrice()
+            .subscribe(
+                price => this.bitcoinPrice = price
+            );
     }
 
     prepareChartData(earnings: Earning[]) {
@@ -112,10 +123,7 @@ export class EarningComponent {
                 this.loadAllUsers();
             }
 
-            this.currencyService.getBitcoinPrice()
-                .subscribe(
-                    price => this.bitcoinPrice = price
-                );
+            this.updateBitcoinPrice();
         });
 
         this.setPeriodicRefresh();
