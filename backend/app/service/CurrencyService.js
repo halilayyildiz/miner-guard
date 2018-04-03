@@ -1,4 +1,5 @@
 var rp = require('request-promise');
+var moment = require('moment-timezone');
 var dbManager = require('./../db/DatabaseManager.js');
 var constants = require('./../conf/constants');
 
@@ -18,8 +19,11 @@ function getBitcoinPrice() {
 }
 
 async function getBitcoinPriceOfDay(day) {
-    // look for cache first
-    if (bitcoinPrices[`${day}`]) {
+    var today = moment().tz('Europe/Istanbul').format("YYYY-MM-DD");
+    // for today run actual value
+    if (day == today) {
+        return bitcoinPrice.last;
+    } else if (bitcoinPrices[`${day}`]) {
         return bitcoinPrices[`${day}`];
     } else {
         let price = await dbManager.getBitcoinPrice(day);
@@ -29,7 +33,6 @@ async function getBitcoinPriceOfDay(day) {
         } else {
             price = 0;
         }
-
         return price;
     }
 }
