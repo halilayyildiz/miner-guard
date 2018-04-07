@@ -20,7 +20,7 @@ import { Earning } from './../../domain/earning';
     styleUrls: ['./earning.scss'],
 })
 
-export class EarningComponent {
+export class EarningComponent implements OnInit {
     constructor(
         private activatedRoute: ActivatedRoute,
         public userService: UserService,
@@ -33,7 +33,7 @@ export class EarningComponent {
     earnings: Earning[];
     chartData: any;
     chartOptions: any;
-    chartDataMaxCount = 15;
+    chartDataMaxCount = 30;
     bitcoinPrice = 0;
 
 
@@ -70,10 +70,18 @@ export class EarningComponent {
         this.chartData = {
             labels: [],
             datasets: [{
-                label: 'Earning (USD)',
+                label: 'USD',
+                yAxisID: 'USD',
                 data: [],
                 fill: false,
                 borderColor: '#EE4444',
+                borderWidth: 2
+            }, {
+                label: 'BTC',
+                yAxisID: 'BTC',
+                data: [],
+                fill: false,
+                borderColor: '#4444EE',
                 borderWidth: 2
             }]
         };
@@ -81,6 +89,7 @@ export class EarningComponent {
         for (let i = 0; i < count; i++) {
             this.chartData.labels[count - (i + 1)] = earnings[i + 1].date.substring(8, 10);
             this.chartData.datasets[0].data[count - (i + 1)] = earnings[i + 1].earnedUSD;
+            this.chartData.datasets[1].data[count - (i + 1)] = earnings[i + 1].earnedBTC;
         }
 
         this.chartOptions = {
@@ -95,8 +104,20 @@ export class EarningComponent {
                     }
                 }],
                 yAxes: [{
+                    id: 'USD',
+                    type: 'linear',
+                    position: 'left',
                     ticks: {
-                        fontSize: 11
+                        beginAtZero: true,
+                        fontSize: 11,
+                    }
+                }, {
+                    id: 'BTC',
+                    type: 'linear',
+                    position: 'right',
+                    ticks: {
+                        beginAtZero: true,
+                        fontSize: 11,
                     }
                 }]
             }
