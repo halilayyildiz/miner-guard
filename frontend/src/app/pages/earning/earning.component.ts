@@ -33,7 +33,7 @@ export class EarningComponent implements OnInit {
     earnings: Earning[];
     chartData: any;
     chartOptions: any;
-    chartDataMaxCount = 30;
+    chartDataMaxCount = 20;
     bitcoinPrice = 0;
 
 
