@@ -9,7 +9,7 @@ module.exports = Object.freeze({
             WALLET_URL: "https://www.ahashpool.com/api/walletEx/?address="
         },
         ZERGPOOL: {
-            WALLET_URL: "http://api.zergpool.com:8080/api/wallet?address="
+            WALLET_URL: "http://api.zergpool.com:8080/api/walletEx?address="
         }
     }
 });

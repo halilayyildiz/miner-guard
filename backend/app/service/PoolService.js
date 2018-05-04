@@ -18,7 +18,7 @@ async function getWalletStatus(wallet) {
         let walletData = JSON.parse(response);
         status = parseWalletData(wallet.pool, walletData);
     } catch (err) {
-        throw new Error(`Unable to fetch/parse wallet: ${wallet.address}`);
+        throw new Error(`Unable to fetch/parse wallet: ${wallet.pool} - ${wallet.address}`);
     }
     return status;
 }
@@ -26,7 +26,7 @@ async function getWalletStatus(wallet) {
 function parseWalletData(pool, data) {
     let walletData = {};
 
-    if (pool == 'ZPOOL' || pool === 'ZERGPOOL') {
+    if (pool == 'ZPOOL' || pool == 'ZERGPOOL') {
         walletData.total_earned = data.total;
         walletData.miner_count = data.miners.length;
     } else if (pool == 'AHASH') {

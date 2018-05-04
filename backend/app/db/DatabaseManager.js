@@ -8,6 +8,7 @@ module.exports = {
     connectDatabase: connectDatabase,
     getAllUsers: getAllUsers,
     getUser: getUser,
+    getUserWallet: getUserWallet,
     getUserWallets: getUserWallets,
     getUserHourlyEarnings: getUserHourlyEarnings,
     getUserDailyEarnings: getUserDailyEarnings,
@@ -60,6 +61,19 @@ function getAllUsers() {
                 result[i] = new User(rows[i].ID, rows[i].NAME, rows[i].EMAIL, rows[i].PHONE, rows[i].MINER_COUNT);
             }
 
+            return resolve(result);
+        })
+    })
+}
+
+function getUserWallet(userId, walletAddress) {
+    return new Promise((resolve, reject) => {
+        db.get('SELECT * FROM wallet WHERE user_id = ? AND address = ?', [userId, walletAddress], (err, row) => {
+            if (err) {
+                return reject(err)
+            }
+
+            let result = new Wallet(row.ADDRESS, row.POOL, row.USER_ID, row.TOTAL_EARNED);
             return resolve(result);
         })
     })
@@ -162,14 +176,14 @@ function getBitcoinPrice(date) {
     })
 }
 
-function addWalletToUser(userId, walletId) {
+function addWalletToUser(wallet) {
     return new Promise((resolve, reject) => {
 
-        if (!userId || !walletId) {
-            return reject("FAIL: user or wallet id empty !");
+        if (!wallet.userId || !wallet.address || !wallet.pool) {
+            return reject("FAIL: user,wallet or pool is empty !");
         }
 
-        db.run('INSERT INTO WALLET(USER_ID, ADDRESS, TOTAL_EARNED) VALUES(?, ?, 0)', [userId, walletId], (err, row) => {
+        db.run('INSERT INTO WALLET(USER_ID, ADDRESS, POOL, TOTAL_EARNED) VALUES(?, ?, ?, 0)', [wallet.userId, wallet.address, wallet.pool], (err, row) => {
             if (err) {
                 return reject("" + err);
             }
@@ -178,14 +192,14 @@ function addWalletToUser(userId, walletId) {
     })
 }
 
-function removeWalletFromUser(userId, walletId) {
+function removeWalletFromUser(wallet) {
     return new Promise((resolve, reject) => {
 
-        if (!userId || !walletId) {
-            return reject("FAIL: user or wallet id empty !");
+        if (!wallet.userId || !wallet.address || !wallet.pool) {
+            return reject("FAIL: user,wallet or pool is empty !");
         }
 
-        db.run('DELETE FROM WALLET WHERE USER_ID = ? AND ADDRESS = ?', [userId, walletId], (err, row) => {
+        db.run('DELETE FROM WALLET WHERE USER_ID = ? AND ADDRESS = ? AND POOL = ?', [wallet.userId, wallet.address, wallet.pool], (err, row) => {
             if (err) {
                 return reject("" + err);
             }
