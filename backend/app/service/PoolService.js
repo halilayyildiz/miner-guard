@@ -26,7 +26,7 @@ async function getWalletStatus(wallet) {
 function parseWalletData(pool, data) {
     let walletData = {};
 
-    if (pool == 'ZPOOL') {
+    if (pool == 'ZPOOL' || pool === 'ZERGPOOL') {
         walletData.total_earned = data.total;
         walletData.miner_count = data.miners.length;
     } else if (pool == 'AHASH') {
