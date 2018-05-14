@@ -43,7 +43,7 @@ async function checkStatus() {
                     dbManager.updateWalletTotalEarning(users[i].wallets[j], walletData.total_earned);
                 } else {
                     logger.log('WALLET INACTIVE', users[i].wallets[j].pool + ' - ' + users[i].wallets[j].address);
-                    const userWallet = await dbManager.getUserWallet(users[i].id, users[i].wallets[j].address);
+                    const userWallet = await dbManager.getUserWallet(users[i].id, users[i].wallets[j]);
 
                     walletData.total_earned = userWallet.totalEarned;
                     walletData.miner_count = 0;

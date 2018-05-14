@@ -66,9 +66,9 @@ function getAllUsers() {
     })
 }
 
-function getUserWallet(userId, walletAddress) {
+function getUserWallet(userId, wallet) {
     return new Promise((resolve, reject) => {
-        db.get('SELECT * FROM wallet WHERE user_id = ? AND address = ?', [userId, walletAddress], (err, row) => {
+        db.get('SELECT * FROM wallet WHERE user_id = ? AND address = ? AND pool = ?', [userId, wallet.address, wallet.pool], (err, row) => {
             if (err) {
                 return reject(err)
             }
