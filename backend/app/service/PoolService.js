@@ -18,7 +18,7 @@ async function getWalletStatus(wallet) {
         let walletData = JSON.parse(response);
         status = parseWalletData(wallet.pool, walletData);
     } catch (err) {
-        throw new Error(`Unable to fetch/parse wallet: ${wallet.pool} - ${wallet.address}`);
+        status = parseWalletData('UNDEFINED', '');
     }
     return status;
 }
@@ -32,6 +32,9 @@ function parseWalletData(pool, data) {
     } else if (pool == 'AHASH') {
         walletData.total_earned = data.total_earned;
         walletData.miner_count = data.miners.length;
+    } else {
+        walletData.total_earned = 0;
+        walletData.miner_count = 0;
     }
 
     return walletData;
